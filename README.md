@@ -1,28 +1,107 @@
 # netdata-monitoring-dashboard
 
-The goal of this project is to learn the basics of monitoring. It is to help you understand how to monitor the health of a system and how to set up a basic monitoring dashboard.
+A basic system monitoring project using [Netdata](https://www.netdata.cloud/).
 
-Requirements
-In this project, you will set up a basic monitoring dashboard using Netdata. Netdata is a powerful, real-time performance and health monitoring tool for systems and applications.
+The project monitors system resources through a Netdata dashboard, configures a CPU usage alert, and provides shell scripts for installation, testing, and cleanup.
 
-Install Netdata on a Linux system.
+![project_screenshot](image.png)
 
-Configure Netdata to monitor basic system metrics such as CPU, memory usage, and disk I/O.
+## Features
 
-Access the Netdata dashboard through a web browser.
+* CPU monitoring
+* RAM monitoring
+* Disk monitoring
+* Network monitoring
+* Custom Netdata dashboard
+* CPU usage alert
 
-Customize at least one aspect of the dashboard (e.g., add a new chart or modify an existing one).
+  * Warning: above 70%
+  * Critical: above 80%
+* Automated installation
+* Automated CPU load test
+* Cleanup script
 
-Set up an alert for a specific metric (e.g., CPU usage above 80%).
+## Project Structure
 
-You can learn more about installing and configuring Netdata here.
+```text
+simple-monitoring/
+├── README.md
+├── setup.sh
+├── test_dashboard.sh
+└── cleanup.sh
+```
 
-You can follow the above steps manually to get the understanding of the project. Once you have a working setup, create a few shell scripts to automate the setup and test the monitoring dashboard.
+## Manual Setup
 
-setup.sh: A shell script to install Netdata on a new system.
+Netdata was installed using the Netdata kickstart script.
 
-test_dashboard.sh: Script to put some load on the system and test the monitoring dashboard.
+The dashboard can be accessed locally at:
 
-cleanup.sh: Script to clean up the system and remove the Netdata agent.
+```text
+http://localhost:19999
+```
 
-The goal with this automation is to slowly get accustomed to DevOps practices and CI/CD pipelines.
+The custom dashboard contains charts for:
+
+* CPU
+* RAM
+* Disk
+* Network
+
+A custom CPU health alarm was also configured:
+
+```text
+WARNING  > 70%
+CRITICAL > 80%
+```
+
+The alert was tested by generating CPU load with:
+
+```bash
+yes > /dev/null
+```
+
+The WARNING alert was successfully triggered.
+
+## Scripts
+
+### setup.sh
+
+Installs Netdata using the official Netdata kickstart script.
+
+```bash
+./setup.sh
+```
+
+### test_dashboard.sh
+
+Generates CPU load for 30 seconds so that the monitoring dashboard can be observed during a performance test.
+
+```bash
+./test_dashboard.sh
+```
+
+### cleanup.sh
+
+Removes the Netdata installation using the Netdata uninstaller.
+
+```bash
+./cleanup.sh
+```
+
+## Technologies
+
+* Linux
+* Netdata
+* Bash
+* Git / GitHub
+
+## What I Learned
+
+* Installing and configuring Netdata
+* Monitoring system resources
+* Creating a custom monitoring dashboard
+* Configuring health alerts
+* Testing alerts with artificial system load
+* Automating Linux administration tasks with Bash scripts
+* Structuring a small monitoring project for GitHub
