@@ -105,3 +105,5 @@ Removes the Netdata installation using the Netdata uninstaller.
 * Testing alerts with artificial system load
 * Automating Linux administration tasks with Bash scripts
 * Structuring a small monitoring project for GitHub
+
+Project Idea: https://roadmap.sh/projects/simple-monitoring-dashboard
